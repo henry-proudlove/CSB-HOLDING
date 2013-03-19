@@ -1,3 +1,7 @@
+<?php
+    header("Content-type: text/css; charset: UTF-8");
+?>
+
 /*
  * HTML5 Boilerplate
  *
@@ -37,7 +41,7 @@ body {
  */
 
 ::-moz-selection {
-    background: #252525;
+    background: #282828;
     text-shadow: none;
 }
 
@@ -130,124 +134,52 @@ textarea {
 	top: 50%;
 	left: 50%;
 	margin: -8px;
-	        transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	   -moz-transition: all 0.5s;
-	    -ms-transition: all 0.5s;
-	     -o-transition: all 0.5s;
+	        transition:         transform 0.5s;
+	-webkit-transition: -webkit-transform 0.5s;
+	   -moz-transition:    -moz-transform 0.5s;
+	    -ms-transition:     -ms-transform 0.5s;
+	     -o-transition:      -o-transform 0.5s;
 }
 
 /* flag backgrounds */
 
-.flag-1{
-	background-image: url('../img/flag-1.svg');
+.rotate{
+	        transform: rotateX(90deg);
+	-webkit-transform: rotateX(90deg);
+	   -moz-transform: rotateX(90deg);
+	    -ms-transform: rotateX(90deg);
+	     -o-transform: rotateX(90deg);
 }
 
-.flag-2{
-	background-image: url('../img/flag-2.svg');
-}
-
-.flag-3{
-	background-image: url('../img/flag-3.svg');
-}
-
-.flag-4{
-	background-image: url('../img/flag-4.svg');
-}
-
-.flag-5{
-	background-image: url('../img/flag-5.svg');
-}
-
-.flag-6{
-	background-image: url('../img/flag-6.svg');
-}
-
-.flag-7{
-	background-image: url('../img/flag-7.svg');
-}
-
-.flag-8{
-	background-image: url('../img/flag-8.svg');
-}
-
-.flag-9{
-	background-image: url('../img/flag-9.svg');
-}
-
-.flag-10{
-	background-image: url('../img/flag-10.svg');
-}
-
-.flag-11{
-	background-image: url('../img/flag-11.svg');
-}
-
-.flag-12{
-	background-image: url('../img/flag-12.svg');
-}
-
-.flag-13{
-	background-image: url('../img/flag-13.svg');
-}
-
-.flag-14{
-	background-image: url('../img/flag-14.svg');
-}
-
-.flag-15{
-	background-image: url('../img/flag-15.svg');
-}
-
-.flag-16{
-	background-image: url('../img/flag-16.svg');
-}
-
-.flag-17{
-	background-image: url('../img/flag-17.svg');
-}
-
-.flag-18{
-	background-image: url('../img/flag-18.svg');
-}
-
-.flag-19{
-	background-image: url('../img/flag-19.svg');
-}
-
-.flag-20{
-	background-image: url('../img/flag-20.svg');
-}
-
-.flag-21{
-	background-image: url('../img/flag-21.svg');
-}
-
-
-/* Flag to flag animations */
-
-.anim-1{
-	animation:anim-1-key 1s;
-	-moz-animation:anim-1-key 1s; /* Firefox */
-	-webkit-animation:anim-1-key 1s; /* Safari and Chrome */
-	-o-animation:anim-1-key 1s; /* Opera */
-}
-
-@-webkit-keyframes anim-1-key /* Safari and Chrome */
-{
-	0% { -webkit-transform: rotateX(0deg); }
-	50% { -webkit-transform: rotateX(90deg); }
-	100% {-webkit-transform: rotateX(0deg); }
-}
-
-
-
-
-
-
-
-
-
+<?php
+	$pfs = array("-webkit-" , "-moz-" , "-ms-" , "-o-", "");
+	
+	for($i=0; $i < 21; $i++){
+	
+		/* Flag Backgrounds */
+		$flag = $i + 1;
+		echo ".flag-" . $flag . "{\n";
+		echo "background-image: url('../img/flag-" . $flag . ".svg');\n";
+		echo "}\n";
+		
+		/* Animation Classs */
+		echo ".anim-" . $flag . "{\n";
+		$stem = "anim-keys-" . $flag . " 1s;\n";
+		foreach($pfs as $pf){
+			echo $pf . "animation : " . $stem;
+		} 
+		echo "}\n";
+		
+		/* Animation Keyframes */
+		foreach($pfs as $pf){
+			echo "@" . $pf . "keyframes anim-keys-" . $flag . "{\n";
+			echo "0% {" . $pf . "transform: rotateX(0deg); }\n";
+			echo "50% {" . $pf . "transform: rotateX(90deg);}\n";
+			echo "100% {" . $pf . "transform: rotateX(0deg); }\n";
+			echo "}\n";
+		}
+	}
+?>
 
 /* ==========================================================================
    Helper classes

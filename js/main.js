@@ -13,6 +13,21 @@ function randFlag(n){
 	}, 500);
 }*/
 
+jQuery.fn.swapFlags = function(randf){
+	e = $(this[0]);
+	randa = Math.ceil(Math.random()*21);
+	if(randa == randf){
+		randa = Math.ceil(Math.random()*21);
+	}else{
+		e.addClass('anim-' + randa);
+		setTimeout(function(){
+			url = 'img/flag-' + Math.ceil(Math.random()*21) + '.svg'
+			e.css('background' , 'url(' + url + ')');
+			console.log('thing');
+	}, 250);
+	}	
+}
+
 jQuery.fn.makeFlags = function(){
 	
 	w = $(this).width();
@@ -27,28 +42,25 @@ jQuery.fn.makeFlags = function(){
 	pcw = 100/divw;
 	pch = 100/divh;
 	console.log(pcw + ', ' + pch); 
-	style = 'width: ' + pcw + '%; height: ' + pch + '%;';
 	for(i=0; i < n; i++){
 		flagn = randFlag(21);
 		$(this).append(
-			'<div class="flag" style="' + style + '"><div class="anim-1 flag-shape flag-' 
-			+ Math.ceil(Math.random()*21) + 
-			'"></div></div>');
+			'<div class="flag" style="width: ' + pcw + '%; height: ' + pch + '%;"><div class="flag-shape flag-' + Math.ceil(Math.random()*21) + '"></div></div>');
 	}
 	t = 0;
-	/*(function loop() {
-		var randT = Math.round(Math.random() * 20);
+	(function loop() {
+		var randT = Math.round(Math.random() * 10);
 		setTimeout(function() {
 			t++;
 			if(t%3){
 				randf = Math.ceil(Math.random()*n);
-				$('.flag-shape').eq(randf).flagSwap();
+				$('.flag-shape').eq(randf).swapFlags(randf);
 				loop();
 			}else{
 				loop();
 			} 
 		}, randT);
-	}());*/
+	}());
 }
 
 $(document).ready(function(){
